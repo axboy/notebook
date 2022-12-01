@@ -1,0 +1,14 @@
+{
+    "name": "gitbook-summary",
+    "version": "1.0.0",
+    "description": "scan files to generate summary",
+    "main": "gen-summary.js",
+    "author": "axboy",
+    "dependencies": {
+        "fs": "0.0.1-security",
+        "path": "^0.12.7"
+    },
+    "engines": {
+        "node": "*"
+    }
+}
