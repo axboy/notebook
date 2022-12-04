@@ -1,5 +1,5 @@
 {
-    "title": "笔记",
+    "title": "打杂笔记",
     "author": "axboy",
     "language": "zh-hans",
     "gitbook": "3.2.3",
@@ -43,7 +43,7 @@
         "copyright": {
             "site": "https://notebook.axboy.cn",
             "author": "axboy",
-            "website": "笔记",
+            "website": "打杂笔记",
             "copyProtect": false
         }
     }
