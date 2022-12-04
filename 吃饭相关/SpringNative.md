@@ -1,29 +1,32 @@
 # Spring Native
 
 ## 准备
+
 - 安装sdkman
-```shell
+
+```sh
 ## 非必须，主要用来安装GraalVM
 curl -s "https://get.sdkman.io" | bash
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 ```
 
 - 安装[GraalVM](https://www.graalvm.org/downloads/)
-```shell
+
+```sh
 ## 通过其它方式安装也可
 sdk install java 21.3.2.r11-grl
 sdk use java 21.3.2.r11-grl
 ```
 
 - 使用GraalVM命令安装原生镜像
-```shell
+
+```sh
 gu install native-image
 ```
 
 ##  Hello World
-- HelloWorld.java
 
- ```java
+```java:HelloWorld.java
 public class HelloWorld {
     public static void main(String[] args) {
         System.out.println("Hello, Native World!");
@@ -31,7 +34,7 @@ public class HelloWorld {
 }
 ```
 
- ```shell
+```sh
 javac HelloWorld.java    # 编译java
 native-image HelloWorld  # 编译native镜像
 ./helloWorld
@@ -41,9 +44,7 @@ native-image HelloWorld  # 编译native镜像
 一个简单的web项目，几个api，几个定时任务
 只修改了pom文件，项目无其他修改。添加了一些配置.
 
-- pom.xml 
-
-```xml
+```xml:pom.xml
 <?xml version="1.0" encoding="UTF-8"?>  
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">  
@@ -198,7 +199,7 @@ native-image HelloWorld  # 编译native镜像
 ```
 
 ## 打包
-```shell
+```sh
 ## jar包，rdc是私服配置
 mvn clean package -Dmaven.test.skip=true -Prdc
 
@@ -222,7 +223,7 @@ mvn clean package -Dmaven.test.skip=true -Prdc -Pnative
  这样测试包、生产包不通用了，不能通过**--spring.profiles.active=prod** 这类参数来切换了。
 
 ## 异常
-```
+```plain
 # 错误1，缺少gcc
 Error: Default native-compiler executable 'gcc' not found via environment variable PATH
 A: sudo apt install gcc
@@ -244,7 +245,7 @@ A: 缺少环境，先不折腾了，本来想看下win10下的本地包是什么
 ## 其它
 - ubuntu解决/usr/bin/ld: cannot find lxxxx一般思路
 
- ```shell
+ ```sh
 # 把l换成lib搜索看看
 apt-cache search libxxxx
 ```

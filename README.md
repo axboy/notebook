@@ -1,7 +1,7 @@
 ## 安装[NodeJs](https://nodejs.org/dist/)
 
 #### 环境变量
-```shell
+```sh
 # 安装版可忽略环境变量配置，建议低于12，若还遇插件安装失败，继续降版本
 NODE12_HOME=~/Soft/node-v12.22.9-darwin-x64
 NODE_HOME=$NODE12_HOME
@@ -9,18 +9,18 @@ export PATH=$PATH:$NODE_HOME/bin
 ```
 
 #### 使用淘宝镜像
-```shell
+```sh
 npm config set registry https://registry.npmmirror.com
 ```
 
 ## [GitBook](https://docs.gitbook.com/)
 #### 安装gitbook-cli
-```shell
+```sh
 npm i -g gitbook-cli
 ```
 
 #### 初始化
-```shell
+```sh
 # 创建文件夹、初始化gitbook，将会生成README.md、SUMMARY.md两个文件
 mkdir notebook
 cd notebook
@@ -82,22 +82,22 @@ gitbook init
 ```
 
 #### 安装book.json中配置的插件
-```shell
+```sh
 gitbook install
 ```
 
 #### 启动
-```shell
+```sh
 gitbook serve
 ```
 
 #### 打包
-```
+```sh
 gitbook build
 ```
 
 #### 由SUMMARY.md生成文件
-```
+```sh
 # 先编辑SUMMARY文件，再执行一遍初始化即可
 gitboot init
 ```
@@ -108,7 +108,7 @@ gitboot init
 
 由于本人习惯直接创建文件，SUMMARY文件的维护就成了问题，故写此js代码扫描文件以生成SUMMARY文件。
 复制package.json, gen-summary.js文件，执行以下命令
-```shell
+```sh
 npm install             # 安装nodejs依赖
 node gen-summary.js     # 执行gen-summary.js里的命令
 ```
@@ -136,6 +136,37 @@ TypeError: cb.apply is not a function
 // fs.stat = statFix(fs.stat)
 // fs.fstat = statFix(fs.fstat)
 // fs.lstat = statFix(fs.lstat)
+```
+
+#### nginx配置
+
+```plain:notebook.axboy.cn.conf
+# http
+server {
+    server_name notebook.axboy.cn;
+    listen *:80;
+    return 302 https://$server_name$request_uri;
+}
+# https
+server {
+    listen *:443 ssl;
+    server_name notebook.axboy.cn;
+    ssl on;
+
+    root /data/notebook.axboy.cn;
+    index index.html;
+
+    access_log  /var/log/nginx/notebook.axboy.cn.access.log;
+    error_log   /var/log/nginx/notebook.axboy.cn.error.log;
+
+    # SSL
+    ssl_certificate   conf.d/cert/notebook.axboy.cn.pem;
+    ssl_certificate_key  conf.d/cert/notebook.axboy.cn.key;
+    ssl_session_timeout 5m;
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_prefer_server_ciphers on;
+}
 ```
 
 ## 参考教程
