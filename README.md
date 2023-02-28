@@ -4,7 +4,7 @@
 
 #### 运行
 
-[详细配置记录点这里](软件使用/GitBook.md)
+[详细配置记录点这里](Soft/GitBook.md)
 
 ```sh
 npm i -g gitbook-cli

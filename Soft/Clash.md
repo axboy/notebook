@@ -10,4 +10,4 @@
 #### 机场
 
 - [一元机场.com](https://xn--4gq62f52gdss.com/#/register?code=SL1GOmnw)
-- [yecao100.org](https://yecao100.org/aff.php?aff=4032)
+- [yecao100.org](https://47.244.30.150/aff.php?aff=4032)

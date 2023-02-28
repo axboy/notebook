@@ -4,9 +4,8 @@
     "language": "zh-hans",
     "gitbook": "3.2.3",
     "plugins": [
-        "anchors@^0.7.1",
+        "anchor-navigation-ex",
         "github",
-        "copyright",
         "sitemap",
         "sitemap-general",
         "expandable-chapters",
@@ -18,6 +17,9 @@
         "tbfed-pagefooter@^0.0.1"
     ],
     "pluginsConfig": {
+        "anchor-navigation-ex":{
+            "multipleH1": false
+        },
         "terminal": {
             "copyButtons": true,
             "fade": false,
@@ -39,12 +41,6 @@
         },
         "sitemap-general": {
             "prefix": "https://notebook.axboy.cn"
-        },
-        "copyright": {
-            "site": "https://notebook.axboy.cn",
-            "author": "axboy",
-            "website": "打杂笔记",
-            "copyProtect": false
         }
     }
 }

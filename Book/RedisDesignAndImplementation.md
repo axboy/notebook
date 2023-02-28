@@ -1,6 +1,6 @@
 # 《Redis设计实现》笔记
 
-## 1.0数据结构与对象
+## 数据结构与对象
 
 ### 1.1 SDS
 
@@ -27,7 +27,7 @@ struct sdshdr {
 - 兼容C字符串
   空字符结尾，延用string.h库
 
-### 1.2 链表
+### 链表
 ```c
 typedef struct listNode{
   //前置节点
@@ -59,7 +59,7 @@ typedef struct list{
 - Redis的链表实现是双端、无环链表
 - void* 指针，可保存各种类型节点值
 
-### 1.3 字典
+### 字典
 
 ```c
 //节点
@@ -100,7 +100,7 @@ typedef struct dictht{
 - 哈希表使用链地址法来解决键冲突，被分配到同一个索引上的多个键值对会连接成一个单向链表。
 - 在对哈希表进行扩展或者收缩操作时，程序需要将现有哈希表包含的所有键值对rehash到新哈希表里面，并且这个rehash过程并不是一次性地完成的，而是渐进式地完成的，对字典curd时顺带处理一些。
 
-### 1.4 跳表
+### 跳表
 
 > Redis只在两个地方用到了跳跃表，一个是实现有序集合键，另一个是在集群节点中用作内部数据结构，除此之外，跳跃表在Redis里面没有其他用途。
 
@@ -132,7 +132,7 @@ typedef struct zskiplist{
 - 在同一个跳跃表中，多个节点可以包含相同的分值，但每个节点的成员对象必须是唯一的。
 - 跳跃表中的节点按照分值大小进行排序，当分值相同时，节点按照成员对象的大小进行排序。
 
-### 1.5 整数集合
+### 整数集合
 
 ```c
 typedef struct intset {
@@ -150,7 +150,7 @@ typedef struct intset {
 - 升级操作为整数集合带来了操作上的灵活性，并且尽可能地节约了内存。
 - 整数集合只支持升级操作，不支持降级操作。
 
-### 1.6 压缩列表
+### 压缩列表
 >压缩列表（ziplist）是列表键和哈希键的底层实现之一。
 
 ```c
@@ -162,7 +162,7 @@ typedef struct intset {
 - 压缩列表可以包含多个节点，每个节点可以保存一个字节数组或者整数值。
 - 添加新节点到压缩列表，或者从压缩列表中删除节点，可能会引发连锁更新操作，但这种操作出现的几率并不高。
 
-### 1.7 对象
+### 对象
 
 ```c
 typedef struct redisObject {
@@ -191,7 +191,7 @@ typedef struct redisObject {
 
 ![obj](https://axboy-picgo-sz.oss-cn-shenzhen.aliyuncs.com/picgo/202210/f57d9edc4e2817ded7bc44ada5c58d35-a2f318.png)
 
-## 2.0 单机数据库的实现
+## 单机数据库的实现
 
 ```c
 struct redisServer {
@@ -217,7 +217,7 @@ typedef struct redisDb {
 }
 ```
 
-### 2.1 过期键删除策略
+### 过期键删除策略
 一般来说，有如下3种策略，redis使用的是惰性删除+定期删除。
 
 - 定时删除
@@ -233,7 +233,7 @@ typedef struct redisDb {
 ![aof](https://axboy-picgo-sz.oss-cn-shenzhen.aliyuncs.com/picgo/202209/51b8144372077b2ce9413596827e410c-7aa1b6.png)
 ![master-slave](https://axboy-picgo-sz.oss-cn-shenzhen.aliyuncs.com/picgo/202209/710fc053b45f1e68fc87998e3eb5afa1-18f9e7.png)
 
-### 2.2 RDB持久化
+### RDB持久化
 ![server start](https://axboy-picgo-sz.oss-cn-shenzhen.aliyuncs.com/picgo/202209/985792254f90dc94927311a48bae1b38-21a968.png)
 
 ```sh
@@ -241,18 +241,18 @@ typedef struct redisDb {
 od -c dump.rdb
 ```
 
-### 2.3 AOF持久化
+### AOF持久化
 ![aof](https://axboy-picgo-sz.oss-cn-shenzhen.aliyuncs.com/picgo/202209/50c9dffbfad9e2623c1708984dcd8993-cc9f8c.png)
 
-### 2.4 客户端
+### 客户端
 ![clients](https://axboy-picgo-sz.oss-cn-shenzhen.aliyuncs.com/picgo/202209/018cff45fbd37683748f725985af495e-18dbb8.png)
 
-### 2.5 服务器
+### 服务器
 ![server](https://axboy-picgo-sz.oss-cn-shenzhen.aliyuncs.com/picgo/202209/388cb82ca1bd371d34b8bb6b1d5aa80e-14b067.png)
 
-## 3.0 多机数据库的实现
+## 多机数据库的实现
 
-### 3.1 [复制](http://redis.io/topics/replication)
+### [复制](http://redis.io/topics/replication)
 
 ```sh
 info replication
@@ -262,10 +262,10 @@ slaveof 192.168.1.30 6379
 
 ![rep](https://axboy-picgo-sz.oss-cn-shenzhen.aliyuncs.com/picgo/202209/c90bd44e782ba9b3afc5adc3585b52ea-013394.png)
 
-### 3.2 哨兵
+### 哨兵
 ![sentinel](https://axboy-picgo-sz.oss-cn-shenzhen.aliyuncs.com/picgo/202209/e22be50e7efcfe97b28f36521169d73c-989996.png)
 
-### 3.3 集群
+### 集群
 没用过，粗略看了一遍，没细看
 
 ```sh
@@ -277,14 +277,14 @@ CLUSTER ADDSLOTS 0 1 2 3 4 ... 5000
 
 ![cluster](https://axboy-picgo-sz.oss-cn-shenzhen.aliyuncs.com/picgo/202209/62b5167d47257c8e992627b5e9f23f01-30211c.png)
 
-## 4.0 独立功能的实现
+## 独立功能的实现
 
-### 4.1 发布订阅
+### 发布订阅
 ![sub](https://axboy-picgo-sz.oss-cn-shenzhen.aliyuncs.com/picgo/202209/ab1cf31985b37dca7f3c644339ebacfe-4fd38c.png)
 
-### 4.2 xxx
+### xxx
 
-## 5.0 其它
+## 其它
 
-### 5.1 参考
+### 参考
 - [图书配套网站](http://redisbook.com/)

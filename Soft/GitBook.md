@@ -2,6 +2,8 @@
 
 ## 安装[NodeJs](https://nodejs.org/dist/)
 
+> [NodeJs下载](https://nodejs.org/dist/)
+
 #### 环境变量
 ```sh
 # 安装版可忽略环境变量配置，建议低于12，若还遇插件安装失败，继续降版本
@@ -16,6 +18,7 @@ npm config set registry https://registry.npmmirror.com
 ```
 
 ## 安装[GitBook](https://docs.gitbook.com/)
+> [GitBook官网](https://docs.gitbook.com/)
 #### 安装gitbook-cli
 ```sh
 npm i -g gitbook-cli
@@ -38,8 +41,8 @@ gitbook init
     "gitbook": "3.2.3",
     "plugins": [
         "anchors@^0.7.1",
+        "back-to-top-button",
         "github",
-        "copyright",
         "sitemap",
         "sitemap-general",
         "expandable-chapters",
@@ -72,12 +75,6 @@ gitbook init
         },
         "sitemap-general": {
             "prefix": "https://notebook.axboy.cn"
-        },
-        "copyright": {
-            "site": "https://notebook.axboy.cn",
-            "author": "axboy",
-            "website": "笔记",
-            "copyProtect": false
         }
     }
 }
@@ -177,3 +174,4 @@ server {
 - [NVM教程](https://www.runoob.com/w3cnote/nvm-manager-node-versions.html)
 - [插件推荐1](http://www.lilidong.cn/demo/longyuan-gitbook/useConfig/plugins.html)
 - [插件推荐2](https://www.wenjiangs.com/doc/i7jwlc35ye)
+- [GitBook Docs](https://smoothies.com.cn/gitbook-docs)

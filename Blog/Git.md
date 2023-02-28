@@ -6,7 +6,7 @@
 
   ![init](https://axboy-picgo-sz.oss-cn-shenzhen.aliyuncs.com/picgo/202212/cdc8300cd2619cf60df884f8cafe2f93-60e445.png)
 
-#### merge和rebase的区别
+### merge和rebase的区别
 
 - **不严谨的点：**
   1. 下面合并都是理想条件，没有冲突。
@@ -45,7 +45,7 @@
   1. 同分支rebase，不同分支merge
   2. 不明白就只用merge
 
-#### git diff ..和...的区别
+### git diff ..和...的区别
 
 ```sh
 # 比较以下3种diff
@@ -66,6 +66,12 @@ git diff future/1211...master
 
   ![diff result](https://axboy-picgo-sz.oss-cn-shenzhen.aliyuncs.com/picgo/202212/79edccf5eaf1cd3692c89c8f6142ee75-4d2124.png)
 
-  1. **git diff future master**和**git diff feature..master**是一样的，标识比较两个分支最后一次提交 **(5和12)**结果的差异。
+  1. **git diff future master**和**git diff future..master**是一样的，标识比较两个分支最后一次提交 **(5和12)**结果的差异。
 
-  2. **git diff feature...master**就是future和master的共同祖先 **(3)**，和master最新节点 **(5)**对比。
+  2. **git diff future...master**就是future和master的共同祖先 **(3)**，和master最新节点 **(5)**对比。
+
+
+## 冷门操作
+
+### 删除历史大文件
+
