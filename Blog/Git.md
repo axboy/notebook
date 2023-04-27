@@ -75,3 +75,28 @@ git diff future/1211...master
 
 ### 删除历史大文件
 
+### 删除历史中的文件夹
+
+参考自[StackOverflow(how to remove a folder and all its history)](https://stackoverflow.com/questions/32537051/how-to-remove-a-folder-and-all-its-history)
+
+有一种情况是这样的，首次提交代码时没配置 _.gitignore_ ，误上传 _target, node_modules, dist_ 之类的文件夹，下面以node_modules为例：
+
+```sh
+# 删除历史中的文件夹
+git filter-branch --tree-filter 'rm -rf node_modules' --prune-empty HEAD
+
+# 更新忽略文件
+echo node_modules/ >> .gitignore
+git add .gitignore
+git commit -m 'Removing some folder from git history'
+
+# 强制提交
+git push -f
+
+# 其它用户更新
+git pull --rebase
+
+# 重置git，回收磁盘空间(选做)
+git gc
+```
+
